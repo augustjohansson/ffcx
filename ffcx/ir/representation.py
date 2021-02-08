@@ -493,7 +493,7 @@ def _compute_integral_ir(form_data, form_index, prefix, element_numbers, integra
         _offset = 0
         for constant in form_data.original_form.constants():
             original_constant_offsets[constant] = _offset
-            _offset += numpy.product(constant.ufl_shape, dtype=numpy.int)
+            _offset += numpy.product(constant.ufl_shape, dtype=numpy.int32)
 
         ir["original_constant_offsets"] = original_constant_offsets
 
