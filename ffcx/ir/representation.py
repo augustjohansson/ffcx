@@ -654,7 +654,7 @@ def _compute_expression_ir(expression, index, prefix, analysis, parameters, visu
     _offset = 0
     for constant in ufl.algorithms.analysis.extract_constants(expression):
         original_constant_offsets[constant] = _offset
-        _offset += numpy.product(constant.ufl_shape, dtype=numpy.int)
+        _offset += numpy.product(constant.ufl_shape, dtype=numpy.int32)
 
     ir["original_constant_offsets"] = original_constant_offsets
 
