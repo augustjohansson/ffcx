@@ -72,6 +72,10 @@ class BasixBaseElement:
         raise NotImplementedError
 
     @property
+    def block_size(self):
+        return 1
+
+    @property
     def base_permutations(self):
         raise NotImplementedError
 
@@ -310,11 +314,15 @@ class BlockedElement(BasixBaseElement):
     def __init__(self, sub_element, block_size, block_shape=None):
         assert block_size > 0
         self.sub_element = sub_element
-        self.block_size = block_size
+        self._block_size = block_size
         if block_shape is None:
             self.block_shape = (block_size, )
         else:
             self.block_shape = block_shape
+
+    @property
+    def block_size(self):
+        return self._block_size
 
     def tabulate(self, nderivs, points):
         assert len(self.block_shape) == 1  # TODO: block shape

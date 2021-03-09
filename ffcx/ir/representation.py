@@ -166,7 +166,7 @@ def _compute_element_ir(ufl_element, element_numbers, finite_element_names, epsi
     ir["num_sub_elements"] = ufl_element.num_sub_elements()
     ir["create_sub_element"] = [finite_element_names[e] for e in ufl_element.sub_elements()]
 
-    if hasattr(basix_element, "block_size"):
+    if basix_element.block_size > 1:
         ir["block_size"] = basix_element.block_size
         ufl_element = ufl_element.sub_elements()[0]
         basix_element = create_basix_element(ufl_element)
@@ -207,7 +207,7 @@ def _compute_dofmap_ir(ufl_element, element_numbers, dofmap_names):
     ir["create_sub_dofmap"] = [dofmap_names[e] for e in ufl_element.sub_elements()]
     ir["num_sub_dofmaps"] = ufl_element.num_sub_elements()
 
-    if hasattr(basix_element, "block_size"):
+    if basix_element.block_size > 1:
         ir["block_size"] = basix_element.block_size
         basix_element = basix_element.sub_element
     else:
